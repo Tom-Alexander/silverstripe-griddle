@@ -1,0 +1,59 @@
+
+
+.GriddleFieldPaginator {
+
+    text-align: center;
+
+    .arrow(@left) {
+        background: url('../../../../silverstripe-branding/images/icons/pagination-arrows.png') no-repeat @left 3px;
+        padding: 0 5px;
+        height: 15px;
+        line-height: 15px;
+        margin: 0 10px;
+        cursor: pointer;
+    }
+
+    &__First {
+        .arrow(0px);
+        &--disabled {
+            .arrow(0px);
+        }
+    }
+
+    &__Previous {
+        .arrow(-23px);
+        &--disabled {
+            .arrow(-23px);
+        }
+    }
+
+    &__Next {
+        .arrow(-48px);
+        &--disabled {
+            .arrow(-48px);
+        }
+    }
+
+    &__Last {
+        .arrow(-73px);
+        &--disabled {
+            .arrow(-73px);
+        }
+    }
+
+    &__Text {
+        margin: 0 10px;
+        display: inline;
+    }
+
+    &__PageSelector {
+        width: 35px;
+        padding: 0px;
+        margin: 0 10px;
+        line-height: 18px;
+        border-radius: 4px;
+        text-align: center;
+        border: 1px solid #899eab;
+        border-bottom: 1px solid #a7b7c1;
+    }
+}

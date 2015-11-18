@@ -1,0 +1,30 @@
+{
+  "name": "silverstripe-griddle",
+  "version": "0.0.1",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Tom Alexander <me@tomalexander.co.nz>",
+  "license": "MIT",
+  "devDependencies": {
+    "babel": "^5.8.21",
+    "babel-core": "^5.8.22",
+    "babel-loader": "^5.3.2",
+    "less": "^2.5.1",
+    "less-loader": "^2.2.0",
+    "webpack": "^1.11.0",
+    "css-loader": "^0.16.0",
+    "style-loader": "^0.12.3",
+    "extract-text-webpack-plugin": "^0.8.2"
+  },
+  "dependencies": {
+    "griddle-react": "^0.2.14",
+    "raw-loader": "^0.5.1",
+    "react": "^0.14.2",
+    "react-dom": "^0.14.2",
+    "react-select": "^0.9.1",
+    "underscore": "^1.8.3"
+  }
+}

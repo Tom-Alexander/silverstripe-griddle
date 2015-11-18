@@ -1,0 +1,14 @@
+{
+  "name": "tom-alexander/silverstripe-griddle",
+  "type": "silverstripe-module",
+  "description": "GridField replacement",
+  "authors": [
+    {
+      "name": "Tom Alexander",
+      "email": "me@tomalexander.co.nz"
+    }
+  ],
+  "require": {
+    "composer/installers": "~1.0"
+  }
+}
