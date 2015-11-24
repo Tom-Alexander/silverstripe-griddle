@@ -1,22 +1,25 @@
 import Griddle from 'griddle-react';
 import React, {Component} from 'react';
 import GriddleFieldPaginator from './GriddleFieldPaginator';
-import GriddleRelationEditor from './GriddleRelationEditor';
 import '../../css/less/GriddleField.less';
 
 export default class GriddleField extends Component {
 
-  constructor(props) {
-    const local = window.localStorage[props.localStorageID];
-    const parsedLocal = JSON.parse(local);
-    const initialData = {...props.initialData, ...parsedLocal};
-    const {data, start, sort, length, total, ascending} = initialData;
+  static defaultProps = {
+    columnMeta: []
+  };
 
+  constructor(props) {
     super(props);
+    // const local = window.localStorage[props.localStorageID];
+    // const parsedLocal = JSON.parse(local);
+    // const initialData = {...props.initialData, ...parsedLocal};
+    const {data, start, sort, length, total, ascending} = this.props.data;
+
     this.state = {
       results: data,
-      maxPages: Math.floor(data.length / length),
       currentPage: start,
+      maxPages: length - 1,
       externalSortColumn: sort,
       externalResultsPerPage: length,
       externalSortAscending: ascending
@@ -25,11 +28,11 @@ export default class GriddleField extends Component {
 
   getExternalData(...args) {
     this.props.fetcher(...args).then(response => {
-      const {data, start, sort, length, total, ascending} = response
+      const {data, start, sort, length, total, ascending} = response;
       this.setState({
         results: data,
-        maxPages: Math.floor(data.length / length),
         currentPage: start,
+        maxPages: length - 1,
         externalSortColumn: sort,
         externalResultsPerPage: length,
         externalSortAscending: ascending
@@ -88,6 +91,7 @@ export default class GriddleField extends Component {
           externalSetPageSize={this.setPageSize.bind(this)}
           resultsPerPage={this.state.externalResultsPerPage}
           externalSortColumn={this.state.externalSortColumn}
+          columnMetadata={this.props.columnMetadata}
           externalSortAscending={this.state.externalSortAscending}/>
       </div>
     );

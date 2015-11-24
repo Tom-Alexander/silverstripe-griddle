@@ -1,0 +1,7 @@
+GriddleField:
+  javascript:
+    - 'framework/thirdparty/jquery/jquery.js'
+    - 'framework/thirdparty/jquery-entwine/dist/jquery.entwine-dist.js'
+    - 'silverstripe-griddle/js/GriddleField.bundle.js'
+  css:
+    - 'silverstripe-griddle/css/GriddleField.css'

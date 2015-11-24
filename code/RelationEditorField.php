@@ -1,10 +1,16 @@
 <?php
 
-class RelationEditorField extends FormField
+class RelationEditorField extends ReactFormField
 {
 
-    private $grid;
+    /**
+     * @var GriddleField
+     */
+    protected $grid;
 
+    /**
+     * @var array
+     */
     private static $allowed_actions = array(
         'index',
         'GriddleField'
@@ -20,66 +26,116 @@ class RelationEditorField extends FormField
         parent::__construct($name, $title, null);
         $this->name = $name;
         $this->grid = new GriddleField($name, $title, $list);
-        $source = $this->grid->getSource();
+        $source = $this->getSource();
         $source->addColumn('Action');
-        $source->addColumnMapping('Action', function($record) {
-            return json_encode(array(
-                'canEdit' => $record->canEdit(Member::currentUser()),
-                'canDelete' => $record->canDelete(Member::currentUser()),
-            ));
+
+        $source->addColumnMapping('canEdit', function ($record) {
+            return $record->canEdit(Member::currentUser());
+        });
+
+        $source->addColumnMapping('canDelete', function ($record) {
+            return $record->canEdit(Member::currentUser());
+        });
+
+        $source->addColumnMapping('Action', function () {
+            return true;
         });
     }
 
     /**
-     *
+     * Returns the SS_List attached to the associated GriddleFieldSource
+     * @return SS_List
+     */
+    public function getList()
+    {
+        return $this->getSource()->getList();
+    }
+
+    /**
+     * Returns the GriddleFieldSource
+     * @return GriddleFieldSource
+     */
+    public function getSource()
+    {
+        return $this->getGrid()->getSource();
+    }
+
+    /**
+     * Returns the GriddleField
+     * @return GriddleField
+     */
+    public function getGrid()
+    {
+        return $this->grid;
+    }
+
+    /**
+     * Returns the serialized data list after the requested relation has
+     * been deleted
      * @param SS_HTTPRequest $request
      * @return SS_HTTPResponse
      */
-    public function index(SS_HTTPRequest $request) {
+    public function handleDeleteAction(SS_HTTPRequest $request)
+    {
+        $list = $this->getList();
+        $dataClass = $list->dataClass();
+        $object = DataObject::get($dataClass, $request->postVar('ID'));
+        $list->remove($object);
+        return $this->handleGetAction($request);
+    }
+
+    /**
+     * Returns the serialized data list after the requested relation has
+     * been created
+     * @param SS_HTTPRequest $request
+     * @return SS_HTTPResponse
+     */
+    public function handlePostAction(SS_HTTPRequest $request)
+    {
+        $list = $this->getList();
+        $dataClass = $list->dataClass();
+        $object = DataObject::get($dataClass, $request->postVar('ID'));
+        $list->add($object);
+        return $this->handleGetAction($request);
+    }
+
+    /**
+     * Returns the serialized data list form the relation search
+     * @param SS_HTTPRequest $request
+     * @return SS_HTTPResponse
+     */
+    public function handleGetAction(SS_HTTPRequest $request)
+    {
+        $dataClass = $this->getList()->dataClass();
+        $list = DataObject::get($dataClass);
+        $source = new GriddleFieldSource($list);
         $response = new SS_HTTPResponse();
+        $body = json_encode($source->serialize('ID', true, 0, 10));
+        $response->setBody($body);
         return $response;
+    }
+
+    /**
+     * Returns the initial properties required to instantiate the
+     * RelationEditorField component
+     * @return SS_HTTPResponse
+     */
+    public function getInitialProperties()
+    {
+        return array_merge($this->getGrid()->getInitialProperties(), array(
+            'data_class' => $this->getList()->dataClass()
+        ));
     }
 
     /**
      * Send the request to the GriddleField
      * @param SS_HTTPRequest $request
-     * @return array|RequestHandler|SS_HTTPResponse|string
+     * @return SS_HTTPResponse
      */
-    public function GriddleField(SS_HTTPRequest $request) {
-        return $this->grid->handleRequest(
-            $request,
-            $this->model
-        );
-    }
-
-    public function removeRelationAction()
+    public function GriddleField(SS_HTTPRequest $request)
     {
+        $response = $this->getGrid()->handleGetAction($request);
+        $response->addHeader('Content-Type', 'application/json');
+        return $response;
     }
-
-
-    public function createRelationAction()
-    {
-
-    }
-
-    public function searchRelationAction()
-    {
-
-    }
-
-    public function Field($properties = array())
-    {
-        $this->grid->injectRequirements();
-        return $this
-            ->customise(array(
-                'Columns' => $this->grid->getColumns(),
-                'InitialData' =>  $this->grid->getInitialData(),
-                'LocalStorageID' => hash('md5', sprintf(
-                    '%s/%s',
-                    $this->Link(),
-                    $this->name
-                ))))->renderWith(array('templates/GriddleRelationEditorField'));
-    }
-
-
 }

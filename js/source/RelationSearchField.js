@@ -5,11 +5,22 @@ import 'react-select/less/select.less';
 import '../../css/less/RelationSearchField.less';
 
 export default class RelationSearchField extends Component {
+
+findRelated() {
+  return new Promise((resolve, reject) => {
+    jQuery.get(this.props.handler)
+      .done((data) => {
+        const values = data.data.map(item => ({ value: item.ID, label: item.ID + '' }));
+        resolve({options: values});
+      }).fail(reject);
+  });
+}
+
   render() {
     return (
       <div className="RelationSearchField">
-        <Select placeholder="Find by ID:Starts With" asyncOptions={() => {return ['#1']}}/>
-        <ActionButton text="Link Existing"/>
+        <Select placeholder={`Find ${this.props.data_class} by ID:Starts With`} asyncOptions={this.findRelated.bind(this)}/>
+        <ActionButton type="secondary" text="Link Existing"/>
       </div>
     );
   }

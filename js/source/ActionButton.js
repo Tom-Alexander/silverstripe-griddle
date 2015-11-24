@@ -1,19 +1,20 @@
 import React, {Component} from 'react';
+import '../../css/less/ActionButton.less';
 
 export default class ActionButton extends Component {
-  render() {
 
+  static defaultProps = {
+    type: 'primary',
+    onClick: (e) => {e.preventDefault()}
+  };
+
+  render() {
     return (
-      <a href="#"
-      className="action action-detail ss-ui-action-constructive ss-ui-button ui-button ui-widget ui-state-default ui-corner-all new new-link ui-button-text-icon-primary"
-      role="button"
-      aria-disabled="false">
-        <span className="ui-button-icon-primary ui-icon btn-icon-add"></span>
-        {
-          this.props.text ?
-          <span className="ui-button-text">{this.props.text}</span>
-          : null
-        }
+      <a role="button"
+        aria-disabled="false"
+        onClick={this.props.onClick}
+        className={`ActionButton--${this.props.type}`}>
+          <span className="ActionButton__Text">{this.props.text}</span>
       </a>
     );
   }

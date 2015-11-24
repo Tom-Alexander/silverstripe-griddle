@@ -1,0 +1,46 @@
+
+
+.ActionIcon() {
+    width: 16px;
+    height: 16px;
+    display: block;
+    line-height: 16px;
+    display: inline-block;
+    background-repeat: no-repeat;
+    background-image: url('.../../../../framework/admin/images/btn-icon-sf963a8adf3.png');
+}
+
+.ActionIcon {
+
+    &__edit {
+        .ActionIcon();
+        background-position: 2px 0px;
+        background: url('.../../../../framework/admin/images/btn-icon/document--pencil.png');
+    }
+
+    &__removeLink {
+        .ActionIcon();
+        background-position: 0 -212px;
+    }
+
+    &__createLink {
+        .ActionIcon();
+        background-position: 0 -244px;
+    }
+
+    &__accept {
+        .ActionIcon();
+        background-position: 0 0;
+    }
+
+    &__back {
+        .ActionIcon();
+        background-position: 0 -148px;
+    }
+
+    &__add {
+        .ActionIcon();
+        background-position: 0 -32px;
+    }
+
+}

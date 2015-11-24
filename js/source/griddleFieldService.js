@@ -6,7 +6,7 @@ export function createFetchGridData(localStorageID, link, name) {
       const storage = window.localStorage[localStorageID];
       const data = {start, length, sort, ascending};
       window.localStorage[localStorageID] = JSON.stringify(data);
-      jQuery.get(`${window.location}/ItemEditForm/field/${name}`, data)
+      jQuery.get(link, data)
         .done(resolve)
         .fail(reject);
     });

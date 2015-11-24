@@ -1,35 +1,41 @@
 
-.ActionButton {
-
-    &__Inner {
-
-        &--default {
-
+.ActionButton(
+    @color,
+    @border,
+    @border-bottom,
+    @background-top,
+    @background-bottom) {
+        padding: 10px;
+        color: @color;
+        cursor: pointer;
+        text-shadow: none;
+        font-weight: bold;
+        line-height: 37px;
+        border-radius: 4px;
+        text-decoration: none;
+        border: 1px solid @border;
+        border-bottom-color: @border-bottom;
+        background: linear-gradient(@background-top, @background-bottom);
+        &:hover{
+            border-color: lighten(@border, 10%);
+            background: linear-gradient(
+                lighten(@background-top, 10%),
+                lighten(@background-bottom, 10%));
         }
+}
 
-        &--primary {
+.cms a.ActionButton {
 
-        }
-
-        &--success {
-
-        }
-
-        &--warning {
-
-        }
-
-        &--danger {
-
-        }
+    &--primary {
+        .ActionButton(#FFFFFF, #1F9433, #166a24, #93be42, #1f9433);
     }
 
-    .&__Icon {
-
+    &--secondary {
+        .ActionButton(#393939, #c0c0c2, #a6a6a9, #FFFFFF, #d9d9d9);
     }
 
-    .&__Label {
-
+    &--danger {
+        .ActionButton(#FFFFFF, #980c10, #980c10, #ed1c24, #aa1317);
     }
 
 }

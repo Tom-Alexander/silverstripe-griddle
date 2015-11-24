@@ -1,5 +1,9 @@
 <?php
 
+/**
+ * Class GriddleFieldSource
+ *
+ */
 class GriddleFieldSource extends Object
 {
 
@@ -12,21 +16,36 @@ class GriddleFieldSource extends Object
     /**
      * @param SS_List $list
      */
-    public function __construct(SS_List $list = null) {
+    public function __construct(SS_List $list = null)
+    {
         $this->list = $list;
         $this->addColumnMapping('ID', 'ID');
         $fields = singleton($this->list->dataClass())->summaryFields();
-        foreach($fields as $title => $field) {
+        foreach ($fields as $title => $field) {
             $this->addColumn($title);
             $this->addColumnMapping($title, $field);
         }
     }
 
+    /**
+     * @return SS_List
+     */
+    public function getList()
+    {
+        return $this->list;
+    }
+
+    /**
+     * @return array
+     */
     public function getColumns()
     {
         return $this->columns;
     }
 
+    /**
+     * @return array
+     */
     public function getColumnMappings()
     {
         return $this->columnMappings;
@@ -59,15 +78,29 @@ class GriddleFieldSource extends Object
         return $this->columnMappings;
     }
 
+    /**
+     * @param $record
+     * @param $map
+     * @return mixed
+     */
     protected function getValue($record, $map)
     {
-        if(is_string($map)) {
+        if (is_string($map)) {
             return $record->{$map};
-        } else if(is_callable($map)) {
+        }
+
+        if (is_callable($map)) {
             return $map($record, $this->list);
         }
     }
 
+    /**
+     * @param $sort
+     * @param $sortAscending
+     * @param $start
+     * @param $length
+     * @return array
+     */
     public function serialize($sort, $sortAscending, $start, $length)
     {
 
@@ -83,8 +116,8 @@ class GriddleFieldSource extends Object
             'length' => $length
         );
 
-        if(in_array($sort, $this->columns)) {
-            if($this->list->canSortBy($sort)) {
+        if (in_array($sort, $this->columns)) {
+            if ($this->list->canSortBy($sort)) {
                 $list = $list->sort($sort, $direction);
                 $results['sort'] = $sort;
                 $results['ascending'] = $sortAscending;
@@ -98,8 +131,8 @@ class GriddleFieldSource extends Object
         $paginatedList->setPageLength($length);
         $results['total'] = $paginatedList->getTotalItems();
 
-        foreach($paginatedList as $key => $record) {
-            foreach($this->getColumnMappings() as $name => $map) {
+        foreach ($paginatedList as $key => $record) {
+            foreach ($this->getColumnMappings() as $name => $map) {
                 $results['data'][$key][$name] = $this->getValue(
                     $record,
                     $map
@@ -107,8 +140,7 @@ class GriddleFieldSource extends Object
             }
         }
 
-        return json_encode($results);
+        return $results;
 
     }
-
 }

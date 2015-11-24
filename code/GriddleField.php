@@ -1,6 +1,9 @@
 <?php
 
-class GriddleField extends FormField
+/**
+ * Class GriddleField
+ */
+class GriddleField extends ReactFormField
 {
 
     private $source;
@@ -14,16 +17,8 @@ class GriddleField extends FormField
     private $initialAscending = 'true';
 
     /**
-     *
-     * @var array
-     */
-    private static $allowed_actions = array(
-        'index'
-    );
-
-    /**
-     * @param string $name
-     * @param null $title
+     * @param string  $name
+     * @param null    $title
      * @param SS_List $list
      */
     public function __construct($name, $title = null, SS_List $list = null)
@@ -33,25 +28,18 @@ class GriddleField extends FormField
         $this->source = new GriddleFieldSource($list);
     }
 
-    public function injectRequirements()
-    {
-        Requirements::javascript(THIRDPARTY_DIR . '/jquery/jquery.js');
-        Requirements::javascript(THIRDPARTY_DIR . '/jquery-entwine/dist/jquery.entwine-dist.js');
-        Requirements::javascript(GRIDDLE_FIELD_DIR . '/js/GriddleField.bundle.js');
-        Requirements::css(GRIDDLE_FIELD_DIR . '/css/GriddleField.css');
-    }
-
-    public function index($request)
+    public function handleGetAction(SS_HTTPRequest $request)
     {
         $response = new SS_HTTPResponse();
         $response->setBody(
-            $this->source->serialize(
-                self::get_default($request, 'sort', null),
-                self::get_default($request, 'ascending', $this->initialAscending),
-                self::get_default($request, 'start', $this->initialStart),
-                self::get_default($request, 'length', $this->length)
-            ));
-        $response->addHeader('Content-Type', 'application/json');
+            json_encode($this->source->serialize(
+                self::getDefault($request, 'sort', null),
+                self::getDefault($request, 'ascending', $this->initialAscending),
+                self::getDefault($request, 'start', $this->initialStart),
+                self::getDefault($request, 'length', $this->length)
+            ))
+        );
+
         return $response;
     }
 
@@ -60,10 +48,10 @@ class GriddleField extends FormField
         return $this->source;
     }
 
-    protected static function get_default(SS_HTTPRequest $request, $var, $default)
+    protected static function getDefault(SS_HTTPRequest $request, $var, $default)
     {
 
-        if($value = $request->getVar($var)) {
+        if ($value = $request->getVar($var)) {
             return $value;
         }
 
@@ -71,37 +59,19 @@ class GriddleField extends FormField
 
     }
 
-    public function getColumns()
+    public function getInitialProperties()
     {
-        return Convert::raw2xml(
-            json_encode(array_values($this->source->getColumns()))
-        );
-    }
-
-    public function getInitialData()
-    {
-        return Convert::raw2xml(json_encode(
-            $this->source->serialize(
+        return array(
+            'title' => $this->title,
+            'field_name' => $this->name,
+            'field_id' => $this->getComponentID,
+            'columns' => $this->source->getColumns(),
+            'data' => $this->source->serialize(
                 $this->initialSort,
                 $this->initialAscending,
                 $this->initialStart,
                 $this->length
             )
-        ));
+        );
     }
-
-    public function Field($properties = array())
-    {
-        $this->injectRequirements();
-        return $this->customise(array(
-            'Columns' => $this->getColumns(),
-            'InitialData' =>  $this->getInitialData(),
-            'LocalStorageID' => hash('md5', sprintf(
-                '%s/%s',
-                $this->Link(),
-                $this->name
-            ))))->renderWith(array('templates/GriddleField'));
-    }
-
-
 }

@@ -79,6 +79,254 @@
   border: 1px solid #899eab;
   border-bottom: 1px solid #a7b7c1;
 }
+.griddle-container {
+  border-color: #E0E0E0;
+  border-width: 1px;
+}
+.GriddleField {
+  float: left;
+  width: 100%;
+}
+.GriddleField__Title {
+  padding: 5px;
+  border-top-left-radius: 5px;
+  border-top-right-radius: 5px;
+  border: 1px solid #BDBDBD;
+  border-bottom-width: 0;
+  background: linear-gradient(#f9f9f9, #f1f1f1);
+}
+.GriddleField__Title h2 {
+  text-shadow: 1px 1px 0 rgba(255, 255, 255, 0.8);
+  color: #444;
+  padding: 0px;
+  font-size: 16.8px;
+  margin: 1px 8px 0;
+}
+.GriddleField__Ascending,
+.GriddleField__Descending {
+  width: 20px;
+  height: 26px;
+  position: absolute;
+  right: 0;
+  top: 0;
+}
+.GriddleField__Ascending {
+  background: transparent url('../../../../framework/images/arrows.png') no-repeat right -76px;
+}
+.GriddleField__Descending {
+  background: transparent url('../../../../framework/images/arrows.png') no-repeat right -118px;
+}
+.griddle .top-section {
+  clear: both;
+  display: table;
+  width: 100%;
+}
+.griddle .griddle-filter {
+  float: left;
+  width: 50%;
+  text-align: left;
+  color: #222;
+  min-height: 1px;
+}
+.griddle .griddle-settings-toggle {
+  float: left;
+  width: 50%;
+  text-align: right;
+}
+.griddle .griddle-settings {
+  background-color: #FFF;
+  border: 1px solid #DDD;
+  color: #222;
+  padding: 10px;
+  margin-bottom: 10px;
+}
+.griddle .griddle-settings .griddle-columns {
+  clear: both;
+  display: table;
+  width: 100%;
+  border-bottom: 1px solid #EDEDED;
+  margin-bottom: 10px;
+}
+.griddle .griddle-settings .griddle-column-selection {
+  float: left;
+  width: 20%;
+}
+.griddle table {
+  width: 100%;
+  table-layout: fixed;
+  border-collapse: separate !important;
+}
+.griddle th {
+  position: relative;
+  text-shadow: 0px -1px 0 rgba(0, 0, 0, 0.2);
+  padding-left: 8px;
+  padding-right: 8px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  -o-text-overflow: ellipsis;
+  padding: 5px;
+  background: #f9f9f9;
+  white-space: nowrap;
+  border: 1px solid #BDBDBD;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.2);
+}
+.griddle th:first-child {
+  border-right: 0;
+}
+.griddle tr {
+  background: #fff;
+}
+.griddle tr:nth-child(even) {
+  background: #F0F4F7;
+}
+.griddle tr:hover {
+  background: #FFFAD6;
+}
+.griddle-body .standard-row td:first-child {
+  border-right: 0;
+}
+.griddle-body td {
+  color: #666;
+  padding: 8px 8px;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  border-right: 1px solid rgba(0, 0, 0, 0.1);
+  border-left: 1px solid rgba(0, 0, 0, 0.1);
+}
+.griddle .footer-container {
+  padding: 5px;
+  border-bottom-left-radius: 5px;
+  border-bottom-right-radius: 5px;
+  border: 1px solid #BDBDBD;
+  background: linear-gradient(#f9f9f9, #f1f1f1);
+}
+.griddle .griddle-previous,
+.griddle .griddle-page,
+.griddle .griddle-next {
+  float: left;
+  width: 33%;
+  min-height: 1px;
+  margin-top: 5px;
+}
+.griddle .griddle-page {
+  text-align: center;
+}
+.griddle .griddle-next {
+  text-align: right;
+}
+.cms a.ActionButton--primary {
+  padding: 10px;
+  color: #FFFFFF;
+  cursor: pointer;
+  text-shadow: none;
+  font-weight: bold;
+  line-height: 37px;
+  border-radius: 4px;
+  text-decoration: none;
+  border: 1px solid #1F9433;
+  border-bottom-color: #166a24;
+  background: linear-gradient(#93be42, #1f9433);
+}
+.cms a.ActionButton--primary:hover {
+  border-color: #28be42;
+  background: linear-gradient(#a9cb68, #28be42);
+}
+.cms a.ActionButton--secondary {
+  padding: 10px;
+  color: #393939;
+  cursor: pointer;
+  text-shadow: none;
+  font-weight: bold;
+  line-height: 37px;
+  border-radius: 4px;
+  text-decoration: none;
+  border: 1px solid #c0c0c2;
+  border-bottom-color: #a6a6a9;
+  background: linear-gradient(#FFFFFF, #d9d9d9);
+}
+.cms a.ActionButton--secondary:hover {
+  border-color: #dadadb;
+  background: linear-gradient(#ffffff, #f3f3f3);
+}
+.cms a.ActionButton--danger {
+  padding: 10px;
+  color: #FFFFFF;
+  cursor: pointer;
+  text-shadow: none;
+  font-weight: bold;
+  line-height: 37px;
+  border-radius: 4px;
+  text-decoration: none;
+  border: 1px solid #980c10;
+  border-bottom-color: #980c10;
+  background: linear-gradient(#ed1c24, #aa1317);
+}
+.cms a.ActionButton--danger:hover {
+  border-color: #c71015;
+  background: linear-gradient(#f14b52, #d8181d);
+}
+.ActionIcon__edit {
+  width: 16px;
+  height: 16px;
+  display: block;
+  line-height: 16px;
+  display: inline-block;
+  background-repeat: no-repeat;
+  background-image: url('../../framework/admin/images/btn-icon-sf963a8adf3.png');
+  background-position: 2px 0px;
+  background: url('../../framework/admin/images/btn-icon/document--pencil.png');
+}
+.ActionIcon__removeLink {
+  width: 16px;
+  height: 16px;
+  display: block;
+  line-height: 16px;
+  display: inline-block;
+  background-repeat: no-repeat;
+  background-image: url('../../framework/admin/images/btn-icon-sf963a8adf3.png');
+  background-position: 0 -212px;
+}
+.ActionIcon__createLink {
+  width: 16px;
+  height: 16px;
+  display: block;
+  line-height: 16px;
+  display: inline-block;
+  background-repeat: no-repeat;
+  background-image: url('../../framework/admin/images/btn-icon-sf963a8adf3.png');
+  background-position: 0 -244px;
+}
+.ActionIcon__accept {
+  width: 16px;
+  height: 16px;
+  display: block;
+  line-height: 16px;
+  display: inline-block;
+  background-repeat: no-repeat;
+  background-image: url('../../framework/admin/images/btn-icon-sf963a8adf3.png');
+  background-position: 0 0;
+}
+.ActionIcon__back {
+  width: 16px;
+  height: 16px;
+  display: block;
+  line-height: 16px;
+  display: inline-block;
+  background-repeat: no-repeat;
+  background-image: url('../../framework/admin/images/btn-icon-sf963a8adf3.png');
+  background-position: 0 -148px;
+}
+.ActionIcon__add {
+  width: 16px;
+  height: 16px;
+  display: block;
+  line-height: 16px;
+  display: inline-block;
+  background-repeat: no-repeat;
+  background-image: url('../../framework/admin/images/btn-icon-sf963a8adf3.png');
+  background-position: 0 -32px;
+}
 /**
  * React Select
  * ============
@@ -406,10 +654,32 @@
 .RelationSearchField .Select {
   width: 270px;
   height: 32px;
+  float: left;
+}
+.RelationSearchField .Select .Select-control {
+  border-right: 0;
+  border-top-right-radius: 0;
+  border-bottom-right-radius: 0;
+}
+.RelationSearchField a.ActionButton--secondary {
+  border-top-left-radius: 0;
+  border-bottom-left-radius: 0;
 }
 .GriddleRelationEditor__Actions {
   width: 100%;
   float: left;
+}
+.GriddleRelationEditor .griddle th.Action {
+  width: 12%;
+}
+.GriddleRelationEditor .griddle th.Action span {
+  display: none;
+}
+.GriddleRelationEditor .griddle td.Action {
+  text-align: center;
+}
+.GriddleRelationEditor .griddle td.Action span {
+  margin: 0 10px;
 }
 .GriddleRelationEditor__ActionContainer--left,
 .GriddleRelationEditor__ActionContainer--right {
@@ -420,140 +690,4 @@
 }
 .GriddleRelationEditor__ActionContainer--right {
   float: right;
-}
-.griddle-container {
-  border-color: #E0E0E0;
-  border-width: 1px;
-}
-.GriddleField {
-  float: left;
-  width: 100%;
-}
-.GriddleField__Title {
-  padding: 5px;
-  border-top-left-radius: 5px;
-  border-top-right-radius: 5px;
-  border: 1px solid #BDBDBD;
-  border-bottom-width: 0;
-  background: linear-gradient(#f9f9f9, #f1f1f1);
-}
-.GriddleField__Title h2 {
-  text-shadow: 1px 1px 0 rgba(255, 255, 255, 0.8);
-  color: #444;
-  padding: 0px;
-  font-size: 16.8px;
-  margin: 1px 8px 0;
-}
-.GriddleField__Ascending,
-.GriddleField__Descending {
-  width: 20px;
-  height: 26px;
-  position: absolute;
-  right: 0;
-  top: 0;
-}
-.GriddleField__Ascending {
-  background: transparent url('../../../../framework/images/arrows.png') no-repeat right -76px;
-}
-.GriddleField__Descending {
-  background: transparent url('../../../../framework/images/arrows.png') no-repeat right -118px;
-}
-.griddle .top-section {
-  clear: both;
-  display: table;
-  width: 100%;
-}
-.griddle .griddle-filter {
-  float: left;
-  width: 50%;
-  text-align: left;
-  color: #222;
-  min-height: 1px;
-}
-.griddle .griddle-settings-toggle {
-  float: left;
-  width: 50%;
-  text-align: right;
-}
-.griddle .griddle-settings {
-  background-color: #FFF;
-  border: 1px solid #DDD;
-  color: #222;
-  padding: 10px;
-  margin-bottom: 10px;
-}
-.griddle .griddle-settings .griddle-columns {
-  clear: both;
-  display: table;
-  width: 100%;
-  border-bottom: 1px solid #EDEDED;
-  margin-bottom: 10px;
-}
-.griddle .griddle-settings .griddle-column-selection {
-  float: left;
-  width: 20%;
-}
-.griddle table {
-  width: 100%;
-  table-layout: fixed;
-  border-collapse: separate !important;
-}
-.griddle th {
-  position: relative;
-  text-shadow: 0px -1px 0 rgba(0, 0, 0, 0.2);
-  padding-left: 8px;
-  padding-right: 8px;
-  overflow: hidden;
-  text-overflow: ellipsis;
-  -o-text-overflow: ellipsis;
-  padding: 5px;
-  background: #f9f9f9;
-  white-space: nowrap;
-  border: 1px solid #BDBDBD;
-  border-bottom: 1px solid rgba(0, 0, 0, 0.2);
-}
-.griddle th:first-child {
-  border-right: 0;
-}
-.griddle tr {
-  background: #fff;
-}
-.griddle tr:nth-child(even) {
-  background: #F0F4F7;
-}
-.griddle tr:hover {
-  background: #FFFAD6;
-}
-.griddle-body .standard-row td:first-child {
-  border-right: 0;
-}
-.griddle-body td {
-  color: #666;
-  padding: 8px 8px;
-  overflow: hidden;
-  white-space: nowrap;
-  text-overflow: ellipsis;
-  border-right: 1px solid rgba(0, 0, 0, 0.1);
-  border-left: 1px solid rgba(0, 0, 0, 0.1);
-}
-.griddle .footer-container {
-  padding: 5px;
-  border-bottom-left-radius: 5px;
-  border-bottom-right-radius: 5px;
-  border: 1px solid #BDBDBD;
-  background: linear-gradient(#f9f9f9, #f1f1f1);
-}
-.griddle .griddle-previous,
-.griddle .griddle-page,
-.griddle .griddle-next {
-  float: left;
-  width: 33%;
-  min-height: 1px;
-  margin-top: 5px;
-}
-.griddle .griddle-page {
-  text-align: center;
-}
-.griddle .griddle-next {
-  text-align: right;
 }
